@@ -1,0 +1,33 @@
+.notfound-container {
+    height: 100vh;
+    background: radial-gradient(circle, #0a0f1f, #020617);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .lightning-path {
+    fill: none;
+    stroke: #facc15;
+    stroke-width: 6;
+    stroke-linejoin: round;
+    animation: flash 1.3s infinite;
+  }
+  
+  @keyframes flash {
+    0%, 100% {
+      opacity: 0.2;
+    }
+    10% {
+      opacity: 1;
+    }
+    12% {
+      opacity: 0.1;
+    }
+    20% {
+      opacity: 1;
+    }
+  }
+  

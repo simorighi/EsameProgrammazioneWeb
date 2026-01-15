@@ -18,7 +18,6 @@ function Home() {
           alignItems: "center",
           justifyContent: "center",
           color: "white",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
           filter: "brightness(70%)",
           zIndex: -1,
         }}

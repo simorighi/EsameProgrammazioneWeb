@@ -11,19 +11,17 @@ import NotFound from "./pages/NotFound";
 function App() {
   return (
     <>
-      <div className="container">
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/favorites" element={<Favorites/>} />
-            <Route path="/CityDetails" element={<CityDetails/>} />
-            <Route path="*" element={<NotFound/>} />
-            <Route />
-          </Routes>
-          <Footer/>
-        </Router>
-      </div>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/CityDetails" element={<CityDetails />} />
+          <Route path="*" element={<NotFound />} />
+          <Route />
+        </Routes>
+        <Footer/>
+      </Router>
     </>
   );
 }

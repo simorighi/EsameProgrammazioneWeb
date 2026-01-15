@@ -9,10 +9,10 @@ function Navbar() {
   ];
 
   return (
-    <nav className="navbar navbar-expand-lg bg-opacity-10 bg-black mb-4">
+    <nav className="navbar navbar-expand-lg bg-opacity- bg-body-secondary">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand fs-3 me-5 text-decoration-none text-black">
-          <strong>MyNavbar</strong>
+          <strong className="ms-5">SPAMeteoRighi</strong>
         </Link>
         <button
           className="navbar-toggler"

@@ -9,7 +9,7 @@ function Footer() {
 
   return (
     <>
-      <div className="container-fluid border-top border-black mt-5">
+      <div className="container-fluid border-top border-black ">
         <div className="row mt-3">
           <div className="col-4">
             <h5>SPA Meteo</h5>

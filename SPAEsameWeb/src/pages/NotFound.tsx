@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./NotFound.css";
+import NavigationButton from "../components/componentsReusable/Button";
 
 function NotFound() {
    return (
@@ -20,7 +21,13 @@ function NotFound() {
       <p>La tempesta ha cancellato questa pagina</p>
 
       <Link to="/" className="back-btn">
-        Torna alla Home
+        <NavigationButton
+          colorBackground="#ffffff"
+          borderColor="#000000"
+          textColor="#000000"
+          contentText="Torna alla Home"
+          fontSize="fs-5"
+        />
       </Link>
     </div>
   );

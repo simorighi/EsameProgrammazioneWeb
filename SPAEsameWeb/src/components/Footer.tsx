@@ -9,7 +9,7 @@ function Footer() {
 
   return (
     <>
-      <div className="container-fluid border-top border-black ">
+      <div className="container-fluid border-top border-black bg-black text-white ">
         <div className="row mt-3">
           <div className="col-4">
             <h5>SPA Meteo</h5>
@@ -17,12 +17,12 @@ function Footer() {
           </div>
           <div className="col-4">
             <h5>Navigation</h5>
-            <ul className="navbar-nav me-autofs-6 gap-1">
+            <ul className="navbar-nav me-autofs-6 gap-1 ">
               {pages.map((page, index) => (
                 <li key={index}>
                   <Link
                     to={page.path}
-                    className="nav-item text-decoration-none text-black"
+                    className="nav-item text-decoration-none text-white"
                   >
                     {page.name}
                   </Link>
@@ -38,7 +38,7 @@ function Footer() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
-                fill="black"
+                fill="white"
                 className="bi bi-github border-2 border-black rounded-3"
                 viewBox="0 0 16 16"
               >
@@ -51,7 +51,7 @@ function Footer() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
-                fill="black"
+                fill="white"
                 className="bi bi-instagram"
                 viewBox="0 0 16 16"
               >
@@ -65,7 +65,7 @@ function Footer() {
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
                 height="22"
-                fill="black"
+                fill="white"
                 className="bi bi-envelope-at"
                 viewBox="0 0 16 16"
               >

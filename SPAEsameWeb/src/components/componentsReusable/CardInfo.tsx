@@ -7,9 +7,9 @@ function CardInfo(props: CardInfoProps) {
   const { title, subtitle } = props;
   return (
     <>
-      <div className="card border-1 border-black rounded-0">
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
+      <div className="card border-2 border-white rounded-0 bg-black" >
+        <div className="card-body bg-black">
+          <h5 className="card-title text-white">{title}</h5>
           <h6 className="card-subtitle mb-2 text-body-secondary">{subtitle}</h6>
         </div>
       </div>

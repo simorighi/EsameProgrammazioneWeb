@@ -9,7 +9,7 @@ interface NavigationButtonProps {
   textColor: string;
   borderWidth?: string;
   contentText: React.ReactNode;
-  fontSize?: FontSizeOptions;
+  fontSize: FontSizeOptions;
 }
 
 function NavigationButton(props: NavigationButtonProps) {
@@ -20,7 +20,7 @@ function NavigationButton(props: NavigationButtonProps) {
 
   return (
     <button
-      className={` rounded-0 position-relative overflow-hidden `} 
+      className={` mt-1 rounded-3 position-relative `} 
       style={{
         backgroundColor: isHovered ? textColor : colorBackground,
         borderColor: borderColor,
@@ -30,8 +30,7 @@ function NavigationButton(props: NavigationButtonProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <p className={` ${fontSize} pt-2 px-1`}>{contentText}</p>
-      <span></span>
+      <p className={` ${fontSize} pt-2 px-2`}>{contentText}</p>
     </button>
   );
 }

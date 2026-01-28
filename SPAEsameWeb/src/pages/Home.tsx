@@ -5,26 +5,32 @@ import pioggiaImg from "../assets/pioggia.png";
 import pioggiaBg from "../assets/BgPioggia.png";
 import CardInfo from "../components/componentsReusable/CardInfo";
 import CardCity from "../components/componentsReusable/CardCity";
-import { getCurrentWeatherByCity, type WeatherData } from "../utils/weatherApi";
+import { getCurrentWeatherByCity, getWeatherForMultipleCities, type WeatherData } from "../utils/weatherApi";
 import { useState, useEffect } from "react";
 
 /* da cambiare lo sfondo in base al tempo */
 const pioggia = pioggiaImg;
-/* const pioggia_background = pioggiaBg;
- */
 
 
 function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [otherCities, setOtherCities] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Recupera i dati meteo quando il componente si monta
   useEffect(() => {
     const fetchWeather = async () => {
-      console.log("🔄 Inizio caricamento dati meteo...");
+      console.log("caricamento dati");
       const data = await getCurrentWeatherByCity("Roma"); // Cambia città qui
-      console.log("✅ Dati ricevuti:", data);
+      console.log("Dati ricevuti:", data);
       setWeatherData(data);
+
+      // Carica i dati delle altre città
+      const cities = ["Milano", "Napoli", "Firenze"];
+      const citiesData = await getWeatherForMultipleCities(cities);
+      console.log("Dati altre città:", citiesData);
+      setOtherCities(citiesData);
+
       setLoading(false);
     };
     fetchWeather();
@@ -59,7 +65,7 @@ function Home() {
 
 
             <h2 className="text-white">
-              📍 {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
+            {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
             </h2>
 
             <SearchBar />
@@ -98,7 +104,7 @@ function Home() {
         </div>
       </div>
 
-      {/* RIGA AGGIUNTIVA CON ALTRI PARAMETRI */}
+      {/* RIGA AGGIUNTIVA CON ALTRI PARAMETRI da mettere nel citydetails*/}
       {weatherData && (
         <div className="row bg-black m-0 border-top" style={{ borderColor: "#444" }}>
           <div className="col-12 p-4">
@@ -139,15 +145,6 @@ function Home() {
                 </div>
               </div>
             </div>
-            {weatherData.weatherIconUrl && (
-              <div style={{ marginTop: "20px", textAlign: "center" }}>
-                <img 
-                  src={weatherData.weatherIconUrl} 
-                  alt={weatherData.description}
-                  style={{ width: "100px", height: "100px" }}
-                />
-              </div>
-            )}
           </div>
         </div>
       )}
@@ -155,27 +152,19 @@ function Home() {
 
       {/* row per le CardCity  */}
       <div className="row bg-black pt-5 pb-5 px-3">
-        <div className="col-4" >
-          <CardCity
-            cityName="Città 1"
-            temperature={25}
-            weatherIconUrl="https://<weather_icon_url>"
-          />
-        </div>
-        <div className="col-4">
-          <CardCity
-            cityName="Città 2"
-            temperature={20}
-            weatherIconUrl="https://<weather_icon_url>"
-          />
-        </div>
-        <div className="col-4">
-          <CardCity
-            cityName="Città 3"
-            temperature={18}
-            weatherIconUrl="https://<weather_icon_url>"
-          />
-        </div>
+        {otherCities.length > 0 ? (
+          otherCities.map((city, index) => (
+            <div className="col-4" key={index}>
+              <CardCity
+                cityName={city.cityName}
+                temperature={city.temperature}
+                weatherIconUrl={city.weatherIconUrl}
+              />
+            </div>
+          ))
+        ) : (
+          <p>impossibile caricare le città</p>
+        )}
       </div>
     </>
   );

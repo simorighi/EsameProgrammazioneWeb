@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NavigationButton from "./Button";
+import { useFavorites } from "../../hooks/useFavorites";
+import type { WeatherData } from "../../utils/weatherApi";
 
 interface CardCityProps {
-  cityName: string;
-  temperature: number;
-  weatherIconUrl: string;
-  onDetailsClick?: () => void;
-  onFavoriteToggle?: (isFavorite: boolean) => void;
+  cityData: WeatherData;
 }
 
-function CardCity(props: CardCityProps) {
-  const {
-    cityName,
-    temperature,
-    weatherIconUrl,
-    onDetailsClick,
-    onFavoriteToggle,
-  } = props;
-  const [isFavorite, setIsFavorite] = useState(false);
+function CardCity({ cityData }: CardCityProps) {
+  const navigate = useNavigate();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    setFavorite(isFavorite(cityData.cityName));
+  }, [isFavorite, cityData.cityName]);
 
   const handleFavoriteClick = () => {
-    const newState = !isFavorite;
-    setIsFavorite(newState);
-    if (onFavoriteToggle) {
-      onFavoriteToggle(newState);
+    if (favorite) {
+      removeFavorite(cityData.cityName);
+      setFavorite(false);
+    } else {
+      addFavorite(cityData);
+      setFavorite(true);
     }
+  };
+
+  const handleDetailsClick = () => {
+    navigate(`/city/${encodeURIComponent(cityData.cityName)}`);
   };
 
   return (
@@ -46,24 +50,24 @@ function CardCity(props: CardCityProps) {
                 border: "none",
                 fontSize: "1.5rem",
                 cursor: "pointer",
-                color: isFavorite ? "#FF1744" : "#ffffff",
+                color: favorite ? "#FF1744" : "#ffffff",
               }}
               title={
-                isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"
+                favorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"
               }
             >
-              {isFavorite ? "❤️" : "🤍"}
+              {favorite ? "❤️" : "🤍"}
             </button>
           </div>
 
           <h5 className="card-title text-white" style={{ margin: 0 }}>
-            {cityName}
+            {cityData.cityName}
           </h5>
 
           {/* Icona meteo */}
           <div style={{ textAlign: "center", marginBottom: "1rem" }}>
             <img
-              src={weatherIconUrl}
+              src={cityData.weatherIconUrl}
               alt="Weather Icon"
               style={{ width: "60px", height: "60px" }}
             />
@@ -78,11 +82,11 @@ function CardCity(props: CardCityProps) {
               margin: "0.5rem 0",
             }}
           >
-            {temperature}°C
+            {cityData.temperature}°C
           </p>
 
           {/* Bottone dettagli */}
-          <div style={{ marginTop: "1rem" }} onClick={onDetailsClick}>
+          <div style={{ marginTop: "1rem" }} onClick={handleDetailsClick}>
             <NavigationButton
               colorBackground="#1b1717"
               borderColor="#ffffff"

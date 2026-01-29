@@ -2,17 +2,21 @@ import NavigationButton from "../components/componentsReusable/Button";
 import SearchBar from "../components/componentsReusable/SearchBar";
 
 import pioggiaImg from "../assets/pioggia.png";
-import pioggiaBg from "../assets/BgPioggia.png";
 import CardInfo from "../components/componentsReusable/CardInfo";
 import CardCity from "../components/componentsReusable/CardCity";
 import { getCurrentWeatherByCity, getWeatherForMultipleCities, type WeatherData } from "../utils/weatherApi";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 /* da cambiare lo sfondo in base al tempo */
 const pioggia = pioggiaImg;
 
 
 function Home() {
+  const navigate = useNavigate();
+  const handleSearch = (city: string) => {
+    navigate(`/city/${encodeURIComponent(city)}`);
+  };
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [otherCities, setOtherCities] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +72,7 @@ function Home() {
             {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
             </h2>
 
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
 
             <NavigationButton
               colorBackground="#222121"
@@ -104,62 +108,15 @@ function Home() {
         </div>
       </div>
 
-      {/* RIGA AGGIUNTIVA CON ALTRI PARAMETRI da mettere nel citydetails*/}
-      {weatherData && (
-        <div className="row bg-black m-0 border-top" style={{ borderColor: "#444" }}>
-          <div className="col-12 p-4">
-            <h3 style={{ color: "#fff", marginBottom: "20px" }}>
-              📍 {weatherData.cityName} - Dettagli Meteo
-            </h3>
-            <div className="row">
-              <div className="col-md-3 mb-3">
-                <div style={{ backgroundColor: "#222", padding: "15px", borderRadius: "8px" }}>
-                  <p style={{ color: "#aaa", marginBottom: "5px" }}>Temperatura</p>
-                  <p style={{ color: "#fff", fontSize: "24px", fontWeight: "bold" }}>
-                    {weatherData.temperature}°C
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div style={{ backgroundColor: "#222", padding: "15px", borderRadius: "8px" }}>
-                  <p style={{ color: "#aaa", marginBottom: "5px" }}>Percepita</p>
-                  <p style={{ color: "#fff", fontSize: "24px", fontWeight: "bold" }}>
-                    {weatherData.feelsLike}°C
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div style={{ backgroundColor: "#222", padding: "15px", borderRadius: "8px" }}>
-                  <p style={{ color: "#aaa", marginBottom: "5px" }}>Min/Max</p>
-                  <p style={{ color: "#fff", fontSize: "24px", fontWeight: "bold" }}>
-                    {weatherData.tempMin}° / {weatherData.tempMax}°C
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-3">
-                <div style={{ backgroundColor: "#222", padding: "15px", borderRadius: "8px" }}>
-                  <p style={{ color: "#aaa", marginBottom: "5px" }}>Pressione</p>
-                  <p style={{ color: "#fff", fontSize: "24px", fontWeight: "bold" }}>
-                    {weatherData.pressure} hPa
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+ 
 
 
       {/* row per le CardCity  */}
       <div className="row bg-black pt-5 pb-5 px-3">
         {otherCities.length > 0 ? (
           otherCities.map((city, index) => (
-            <div className="col-4" key={index}>
-              <CardCity
-                cityName={city.cityName}
-                temperature={city.temperature}
-                weatherIconUrl={city.weatherIconUrl}
-              />
+            <div className="col-4 p-5" key={index}>
+              <CardCity cityData={city} />
             </div>
           ))
         ) : (

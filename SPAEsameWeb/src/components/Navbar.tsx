@@ -4,7 +4,7 @@ function Navbar() {
   // Array di configurazione per le pagine
   const pages = [
     { name: "Home", path: "/" },
-    { name: "Favorites", path: "/favorites" },
+    { name: "Favorites", path: "/Favorites" },
     { name: "City Details", path: "/CityDetails" },
   ];
 

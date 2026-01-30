@@ -5,7 +5,6 @@ function Navbar() {
   const pages = [
     { name: "Home", path: "/" },
     { name: "Favorites", path: "/Favorites" },
-    { name: "City Details", path: "/CityDetails" },
   ];
 
   return (

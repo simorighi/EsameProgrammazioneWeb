@@ -1,4 +1,3 @@
-import NavigationButton from "../components/componentsReusable/Button";
 import SearchBar from "../components/componentsReusable/SearchBar";
 
 import pioggiaImg from "../assets/pioggia.png";
@@ -67,40 +66,32 @@ function Home() {
             }}
           >
 
-
-            <h2 className="text-white">
+            <hr className="rigaBianca" />
+            <h1 className="text-white  border-start border-3 p-2">
             {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
-            </h2>
+            </h1>
 
             <SearchBar onSearch={handleSearch} />
 
-            <NavigationButton
-              colorBackground="#222121"
-              borderColor="#222121"
-              textColor="#ffffff"
-              contentText="Vedi dettagli →"
-              fontSize="fs-6"
-              
-            />
           </div>
         </div>
       </div>
 
     {/* ROW PER INFO DELLA CITTA PRINCIPALE (VENTO PIOGGIA UMIDITA) */}
       <div className="row bg-black m-0">
-        <div className="col-4 p-0" >
+        <div className="col-md-4 col-xs-6 p-0" >
           <CardInfo 
             title="Vento" 
             subtitle={loading ? "Caricamento..." : `${weatherData?.windSpeed} km/h`} 
           />
         </div>
-        <div className="col-4 p-0">
+        <div className="col-4 col-xs-6 p-0">
           <CardInfo 
             title="Descrizione" 
             subtitle={loading ? "Caricamento..." : weatherData?.description || "N/A"} 
           />
         </div>
-        <div className="col-4 p-0">
+        <div className="col-4 col-xs-6 p-0">
           <CardInfo 
             title="Umidità" 
             subtitle={loading ? "Caricamento..." : `${weatherData?.humidity}%`} 

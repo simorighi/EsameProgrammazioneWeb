@@ -24,12 +24,12 @@ export interface WeatherData {
 export const getCurrentWeatherByCity = async (cityName: string): Promise<WeatherData | null> => {
   try {
     // Step 1: Recupera le coordinate della città
-    console.log("📍 Cercando coordinate per:", cityName);
+    console.log("Cercando coordinate per:", cityName);
     const geoResponse = await fetch(
       `${BASE_URL}/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`
     );
     const geoData = await geoResponse.json();
-    console.log("📍 Risposta GEO:", geoData);
+    console.log("Risposta GEO:", geoData);
 
     if (!geoData || geoData.length === 0) {
       console.error(`Città "${cityName}" non trovata`);
@@ -37,22 +37,22 @@ export const getCurrentWeatherByCity = async (cityName: string): Promise<Weather
     }
 
     const { lat, lon } = geoData[0];
-    console.log("📍 Coordinate trovate:", lat, lon);
+    console.log("Coordinate trovate:", lat, lon);
 
     // Step 2: Recupera il meteo usando le coordinate
-    console.log("🌤️ Cercando meteo per coordinate:", lat, lon);
+    console.log("Cercando meteo per coordinate:", lat, lon);
     const weatherResponse = await fetch(
       `${BASE_URL}/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=it`
     );
     const weatherData = await weatherResponse.json();
-    console.log("🌤️ Risposta WEATHER completa:", JSON.stringify(weatherData, null, 2));
+    console.log("Risposta WEATHER completa:", JSON.stringify(weatherData, null, 2));
 
     if (!weatherData || weatherData.cod !== 200) {
-      console.error("❌ Errore nel recupero dei dati meteo:", JSON.stringify(weatherData, null, 2));
+      console.error("Errore nel recupero dei dati meteo:", JSON.stringify(weatherData, null, 2));
       return null;
     }
 
-    console.log("✅ Dati meteo validi ricevuti!");
+    console.log("Dati meteo validi ricevuti!");
     return {
       cityName: weatherData.name,
       temperature: Math.round(weatherData.main.temp),
@@ -69,7 +69,7 @@ export const getCurrentWeatherByCity = async (cityName: string): Promise<Weather
       lon,
     };
   } catch (error) {
-    console.error("❌ ERRORE nella chiamata API:", error);
+    console.error("ERRORE nella chiamata API:", error);
     return null;
   }
 };

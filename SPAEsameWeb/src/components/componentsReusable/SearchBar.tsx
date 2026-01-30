@@ -14,7 +14,7 @@ function SearchBar({ onSearch }: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="search-bar d-flex align-items-center">
+        <form onSubmit={handleSubmit} className="search-bar d-flex align-items-start ">
             <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -22,7 +22,7 @@ function SearchBar({ onSearch }: Props) {
                 placeholder="Cerca città"
                 className="border-2 p-1 px-2 border-secondary"
             />
-            <button type="submit" className="btn btn-primary ms-2">Cerca</button>
+            <button type="submit" className="btn btn-dark ms-2 border-white">Cerca</button>
         </form>
     );
 }

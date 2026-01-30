@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCurrentWeatherByCity, type WeatherData } from "../utils/weatherApi";
 import { useFavorites } from "../hooks/useFavorites";
+import CardInfo from "../components/componentsReusable/CardInfo";
 
 function CityDetails() {
   const params = useParams();
@@ -37,7 +38,7 @@ function CityDetails() {
   };
 
   return (
-    <div className="container-fluid bg-black py-4">
+    <div className="container-fluid bg-black py-4 justify-content-center" style={{ minHeight: "80vh" }}>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <button className="btn btn-link" onClick={() => navigate(-1)}>← Torna</button>
         {data && (
@@ -54,16 +55,10 @@ function CityDetails() {
       ) : loading ? (
         <p>Caricamento...</p>
       ) : data ? (
-        <div className="text-white">
-          <h1>{data.cityName}</h1>
-          <img src={data.weatherIconUrl} alt={data.description} />
-          <p>Temperatura: {data.temperature}°C (percepita {data.feelsLike}°C)</p>
-          <p>Min / Max: {data.tempMin}°C / {data.tempMax}°C</p>
-          <p>Descrizione: {data.description}</p>
-          <p>Umidità: {data.humidity}%</p>
-          <p>Vento: {data.windSpeed} km/h</p>
-          <p>Pressione: {data.pressure} hPa</p>
-          <p>Coordinate: {data.lat}, {data.lon}</p>
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-6">
+            <CardInfo cityData={data} />
+          </div>
         </div>
       ) : (
         <p>Impossibile recuperare i dati per {decodeURIComponent(cityParam || "")}</p>

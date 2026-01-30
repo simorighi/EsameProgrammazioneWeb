@@ -11,11 +11,11 @@ function Favorites() {
   };
 
   return (
-    <div className="container-fluid bg-black py-5">
+    <div className="container-fluid bg-black py-5" style={{ minHeight: "80vh" }}>
       <div className="container">
         <h1 className="text-white mb-5"><strong>Le mie città preferite</strong></h1>
         {favorites.length === 0 ? (
-          <p className="text-white text-center">Nessuna città nei preferiti</p>
+          <p className="text-white text-center fs-3">Nessuna città nei preferiti</p>
         ) : (
           <div className="row">
             {favorites.map((city: WeatherData) => (

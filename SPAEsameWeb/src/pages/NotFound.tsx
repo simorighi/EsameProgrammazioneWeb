@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./NotFound.css";
 import NavigationButton from "../components/componentsReusable/Button";
+import Gatto from "../fulmine/fulmine";
 
 function NotFound() {
    return (
@@ -29,6 +30,7 @@ function NotFound() {
           fontSize="fs-5"
         />
       </Link>
+      <Gatto/>
     </div>
   );
 }

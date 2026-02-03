@@ -1,3 +1,9 @@
+# Progetto Deployato con  Netlify
+```
+https://69825567bc3067301f4ef4a5--gleeful-liger-060a5b.netlify.app/
+```
+
+
 # Bootstrap — breve guida d'uso
 
 Bootstrap è un framework CSS utilizzato per il layout e l'organizzazione dei componenti "scrivendo il css" nel ClassName di un tag (simile a tailwindcss). Bootstrap si basa su un sistema di container righe e colonne. Ogni riga ha 12 spazi e i componenti vengono impostati su questo criterio (es: se volessi avere due componenti vicino all'altro utilizzando tutti i 12 spazi, quest'ultimi verranno suddivisi in 2 quindi 6 per un elemento 6 spazi per un altro).

@@ -2,5 +2,6 @@
 
 ---------------------------------------------------------------------------
 
-# SPA per higlhlits di calclio con visualizzazione delle partite
+# Righi Simone
 
+## README nel package SPAEsameWeb

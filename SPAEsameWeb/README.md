@@ -1,16 +1,26 @@
 # Bootstrap — breve guida d'uso
 
-Bootstrap è un framework CSS open-source che semplifica la creazione di layout responsive e componenti UI pronti all'uso (griglie, bottoni, card, navbar, form). Nel contesto di questa SPA viene usato principalmente per il sistema a griglia (container / row / col), le utility classes per spacing e allineamento e le componenti visive (card, buttons).
+Bootstrap è un framework CSS utilizzato per il layout e l'organizzazione dei componenti "scrivendo il css" nel ClassName di un tag (simile a tailwindcss). Bootstrap si basa su un sistema di container righe e colonne. Ogni riga ha 12 spazi e i componenti vengono impostati su questo criterio (es: se volessi avere due componenti vicino all'altro utilizzando tutti i 12 spazi, quest'ultimi verranno suddivisi in 2 quindi 6 per un elemento 6 spazi per un altro).
 
-Come includere Bootstrap nel progetto:
+Per includere Bootstrapv 5.3 nel progetto:
 
-1. Installazione via npm (già presente in `package.json`):
+1. Installarlo via npm (che è già in `package.json`):
 
 ```bash
 npm install bootstrap
 ```
 
+<<<<<<< HEAD
 Nota per React: molti componenti di Bootstrap richiedono modifiche dirette del DOM; per integrazioni migliori si possono usare librerie come `react-bootstrap`.
+=======
+2. L'Import CSS (parte con tutti i componenti scss) nel `main.tsx`:
+
+```ts
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+
+Nota per React: molti componenti di Bootstrap richiedono manipolazione diretta del DOM; per integrazioni più idiomatiche si possono usare librerie come `react-bootstrap`. Nel progetto corrente usiamo solo classi CSS e il grid system, quindi non è necessario importare JS aggiuntivo.
+>>>>>>> 9bf5abdc1b7fe0b5101617ac3e791d3e0961341c
 
 Concetti utili di Bootstrap usati nel progetto:
 - Grid system: `container`, `row`, `col-12 col-sm-6 col-md-4` (breakpoint xs/sm/md/lg/xl/xxl).
@@ -31,8 +41,6 @@ Esempio rapido di layout responsivo:
 
 # Consegna progetto — SPA Meteo (React + TypeScript + Vite)
 
-Questo documento è la versione formale della documentazione pensata per la consegna a un docente universitario. Descrive scopo, funzionamento, istruzioni di setup, struttura del codice, verifiche da eseguire e note importanti per la valutazione.
-
 ## Informazioni progetto
 - **Titolo:** SPA Meteo — Esame/Progetto
 - **Linguaggi / Tool:** React, TypeScript, Vite, Bootstrap 5
@@ -45,7 +53,7 @@ Questo documento è la versione formale della documentazione pensata per la cons
 - Node.js >= 16
 - npm o yarn
 
-## Setup rapido (per il docente)
+## Installazioni per il funzionamento del progetto:
 1. Clonare il repository
 2. Installare dipendenze:
 
@@ -59,19 +67,11 @@ npm install
 npm run dev
 ```
 
-4. Compilare per produzione:
+## Lascio il link della SPA deployato grazie a Netlify
 
-```bash
-npm run build
 ```
 
-5. Anteprima della build:
-
-```bash
-npm run preview
 ```
-
-Nota: la API key di OpenWeatherMap è attualmente inserita direttamente in `src/utils/weatherApi.ts` per semplicità di valutazione. Per un deployment reale occorre spostarla in variabili d'ambiente e non committarla.
 
 ## Come testare (checklist rapida per il docente)
 - Avviare `npm run dev` e aprire `http://localhost:5173` (o la porta indicata da Vite).
@@ -152,20 +152,3 @@ git add .
 git commit -m "feat: consegna progetto SPA Meteo - Nome Cognome"
 git push origin main
 ```
-
-## Valutazione: checklist suggerita per il docente
-- [ ] L'app si avvia correttamente con `npm run dev`.
-- [ ] Le funzionalità richieste (ricerca, dettagli, preferiti) sono implementate.
-- [ ] Uso corretto di TypeScript (tipi principali definiti).
-- [ ] Interfaccia responsive funzionante su breakpoint comuni.
-- [ ] Codice leggibile e organizzato in componenti.
-
-## Contatti e note finali
-- Se vuoi che prepari una versione con API key esterna (`.env`) o che aggiunga test automatici, posso farlo su richiesta.
-
----
-
-### Stato attività (interno)
-- Bozza README: completata
-- Aggiornamento file repo: completato
-- Verifica finale: disponibile su richiesta

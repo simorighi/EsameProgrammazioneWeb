@@ -34,7 +34,6 @@ function Navbar() {
               </li>
             ))}
           </ul>
-          <span className="navbar-text">DA FA IL LOGIN CAZO</span>
         </div>
       </div>
     </nav>

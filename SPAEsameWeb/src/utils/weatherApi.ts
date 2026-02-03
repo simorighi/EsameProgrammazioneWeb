@@ -1,4 +1,7 @@
 const API_KEY = "01eba156d98ea1360e50576692a3a6e6";
+/*
+chiave api secondaria qual'ora la prima scadesse
+const API_KEY = "" */
 
 const BASE_URL = "https://api.openweathermap.org";
 

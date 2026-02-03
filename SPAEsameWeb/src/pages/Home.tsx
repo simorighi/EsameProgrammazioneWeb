@@ -19,6 +19,7 @@ function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [otherCities, setOtherCities] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(true);
+   
 
   // Recupera i dati meteo quando il componente si monta
   useEffect(() => {
@@ -70,6 +71,9 @@ function Home() {
             <h1 className="text-white  border-start border-3 p-2">
             {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
             </h1>
+            <h2 className="text-white display-1 fw-bold">
+              {loading ? "Caricamento..." : `${Math.round(weatherData?.temperature || 0)}°C`}
+            </h2>
 
             <SearchBar onSearch={handleSearch} />
 

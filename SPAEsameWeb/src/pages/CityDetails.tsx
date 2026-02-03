@@ -40,7 +40,7 @@ function CityDetails() {
   return (
     <div className="container-fluid bg-black py-4 justify-content-center" style={{ minHeight: "80vh" }}>
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <button className="btn btn-link" onClick={() => navigate(-1)}>← Torna</button>
+        <button className="btn btn-secondary botrder border-white" onClick={() => navigate(-1)}>← Torna</button>
         {data && (
           <button
             className={`btn ${favorite ? "btn-danger" : "btn-outline-danger"}`}

@@ -10,19 +10,7 @@ Come includere Bootstrap nel progetto:
 npm install bootstrap
 ```
 
-2. Import CSS (consigliato) in `src/main.tsx`:
-
-```ts
-import 'bootstrap/dist/css/bootstrap.min.css';
-```
-
-3. (Opzionale) Se si usano i componenti JS di Bootstrap (modal, dropdown) importare il bundle:
-
-```ts
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-```
-
-Nota per React: molti componenti di Bootstrap richiedono manipolazione diretta del DOM; per integrazioni più idiomatiche si possono usare librerie come `react-bootstrap`. Nel progetto corrente usiamo solo classi CSS e il grid system, quindi non è necessario importare JS aggiuntivo.
+Nota per React: molti componenti di Bootstrap richiedono modifiche dirette del DOM; per integrazioni migliori si possono usare librerie come `react-bootstrap`.
 
 Concetti utili di Bootstrap usati nel progetto:
 - Grid system: `container`, `row`, `col-12 col-sm-6 col-md-4` (breakpoint xs/sm/md/lg/xl/xxl).

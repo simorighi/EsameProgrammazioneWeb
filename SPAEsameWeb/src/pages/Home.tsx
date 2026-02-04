@@ -22,7 +22,7 @@ function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [otherCities, setOtherCities] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(true);
-   
+    
   // Effetto per caricare i dati meteo al montaggio del componente
   useEffect(() => {
     const fetchWeather = async () => {
@@ -68,37 +68,41 @@ function Home() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: "700px",
+              minHeight: "700px", // Considera di usare min-vh-100 per full screen su mobile
+              padding: "20px" // Aggiunto padding per evitare che il testo tocchi i bordi su mobile
             }}
           >
             <hr className="rigaBianca" />
-            <h1 className="text-white  border-start border-3 p-2">
+            <h1 className="text-white border-start border-3 p-2 text-center">
               {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
             </h1>
-            <h2 className="text-white display-1 fw-bold">
+            <h2 className="text-white display-1 fw-bold text-center">
               {loading ? "Caricamento..." : `${Math.round(weatherData?.temperature || 0)}°C`}
             </h2>
 
-            <SearchBar onSearch={handleSearch} />
+            <div className="w-100 d-flex justify-content-center mt-3">
+                <SearchBar onSearch={handleSearch} />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Informazioni principali della città (vento, descrizione, umidità) */}
-      <div className="row bg-black m-0">
-        <div className="col-md-4 col-xs-6 p-0" >
+      <div className="row bg-black m-0 text-center">
+        {/* MODIFICA: col-12 su mobile, col-md-4 da tablet in su */}
+        <div className="col-12 col-md-4 p-3 border-bottom border-md-0 border-secondary">
           <CardInfo 
             title="Vento" 
             subtitle={loading ? "Caricamento..." : `${weatherData?.windSpeed} km/h`} 
           />
         </div>
-        <div className="col-4 col-xs-6 p-0">
+        <div className="col-12 col-md-4 p-3 border-bottom border-md-0 border-secondary">
           <CardInfo 
             title="Descrizione" 
             subtitle={loading ? "Caricamento..." : weatherData?.description || "N/A"} 
           />
         </div>
-        <div className="col-4 col-xs-6 p-0">
+        <div className="col-12 col-md-4 p-3">
           <CardInfo 
             title="Umidità" 
             subtitle={loading ? "Caricamento..." : `${weatherData?.humidity}%`} 
@@ -110,12 +114,15 @@ function Home() {
       <div className="row bg-black pt-5 pb-5 px-3">
         {otherCities.length > 0 ? (
           otherCities.map((city, index) => (
-            <div className="col-4 p-5" key={index}>
+            /* MODIFICA: Grid responsiva e padding ridotto su mobile */
+            <div className="col-12 col-md-6 col-lg-4 p-3 p-md-5" key={index}>
               <CardCity cityData={city} />
             </div>
           ))
         ) : (
-          <p>impossibile caricare le città</p>
+          <div className="col-12 text-center text-white">
+             <p>impossibile caricare le città</p>
+          </div>
         )}
       </div>
     </>

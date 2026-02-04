@@ -46,13 +46,16 @@ function CityDetails() {
   };
 
   return (
+    // MODIFICA: Container flex che copre tutto lo schermo e gestisce il padding
     <div
-      className="container-fluid bg-black py-4 justify-content-center"
-      style={{ minHeight: "80vh" }}
+      className="container-fluid bg-black d-flex flex-column p-3 p-md-5"
+      style={{ minHeight: "100vh" }}
     >
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      {/* Intestazione con bottoni */}
+      {/* MODIFICA: flex-column su mobile (bottoni impilati), flex-sm-row da tablet in su */}
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4 gap-3">
         <button
-          className="btn btn-secondary botrder border-white"
+          className="btn btn-secondary border border-white w-100 w-sm-auto"
           onClick={() => navigate(-1)}
         >
           ← Torna
@@ -60,7 +63,7 @@ function CityDetails() {
 
         {data && (
           <button
-            className={`btn ${favorite ? "btn-danger" : "btn-outline-danger"}`}
+            className={`btn ${favorite ? "btn-danger" : "btn-outline-danger"} w-100 w-sm-auto`}
             onClick={handleToggleFavorite}
           >
             {favorite ? "❤️ Rimuovi dai preferiti" : "🤍 Aggiungi ai preferiti"}
@@ -68,23 +71,36 @@ function CityDetails() {
         )}
       </div>
 
-      {/* Rendering condizionale in base allo stato dell'applicazione */}
-      {!cityParam ? (
-        <p>Città non specificata</p>
-      ) : loading ? (
-        <p>Caricamento...</p>
-      ) : data ? (
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-6">
-            <CardInfo cityData={data} />
+      {/* Contenuto principale centrato verticalmente grazie a flex-grow-1 */}
+      <div className="flex-grow-1 d-flex flex-column justify-content-center w-100">
+        
+        {/* Rendering condizionale in base allo stato dell'applicazione */}
+        {!cityParam ? (
+          <p className="text-white text-center fs-4">Città non specificata</p>
+        ) : loading ? (
+          <div className="text-center text-white">
+            <div className="spinner-border text-light mb-3" role="status">
+                <span className="visually-hidden">Caricamento...</span>
+            </div>
+            <p className="fs-4">Caricamento...</p>
           </div>
-        </div>
-      ) : (
-        <p>
-          Impossibile recuperare i dati per{" "}
-          {decodeURIComponent(cityParam || "")}
-        </p>
-      )}
+        ) : data ? (
+          <div className="row justify-content-center w-100 m-0">
+            {/* MODIFICA: La card occupa tutto su mobile, ma si restringe su desktop per eleganza */}
+            <div className="col-12 col-md-8 col-lg-6">
+              {/* Nota: Assumo che CardInfo qui accetti 'cityData'. 
+                  Se CardInfo è stato creato per accettare 'title' e 'subtitle' come nella Home,
+                  potresti dover adattare le props qui o usare un componente diverso. */}
+              <CardInfo cityData={data} />
+            </div>
+          </div>
+        ) : (
+          <p className="text-white text-center fs-4">
+            Impossibile recuperare i dati per{" "}
+            {decodeURIComponent(cityParam || "")}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

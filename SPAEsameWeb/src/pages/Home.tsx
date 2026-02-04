@@ -1,5 +1,4 @@
 import SearchBar from "../components/componentsReusable/SearchBar";
-
 import pioggiaImg from "../assets/pioggia.png";
 import CardInfo from "../components/componentsReusable/CardInfo";
 import CardCity from "../components/componentsReusable/CardCity";
@@ -10,26 +9,31 @@ import { useNavigate } from "react-router-dom";
 /* da cambiare lo sfondo in base al tempo */
 const pioggia = pioggiaImg;
 
-
 function Home() {
+  // Hook per navigare tra le pagine
   const navigate = useNavigate();
+
+  // Funzione chiamata dalla SearchBar per andare alla pagina dettagli della città
   const handleSearch = (city: string) => {
     navigate(`/city/${encodeURIComponent(city)}`);
   };
+
+  // Stati principali: meteo città principale, altre città e loading
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [otherCities, setOtherCities] = useState<WeatherData[]>([]);
   const [loading, setLoading] = useState(true);
    
-
-  // Recupera i dati meteo quando il componente si monta
+  // Effetto per caricare i dati meteo al montaggio del componente
   useEffect(() => {
     const fetchWeather = async () => {
       console.log("caricamento dati");
-      const data = await getCurrentWeatherByCity("Roma"); // Cambia città qui
+
+      // Dati meteo città principale (Roma)
+      const data = await getCurrentWeatherByCity("Roma"); 
       console.log("Dati ricevuti:", data);
       setWeatherData(data);
 
-      // Carica i dati delle altre città
+      // Dati meteo altre città
       const cities = ["Milano", "Napoli", "Firenze"];
       const citiesData = await getWeatherForMultipleCities(cities);
       console.log("Dati altre città:", citiesData);
@@ -42,6 +46,7 @@ function Home() {
 
   return (
     <>
+      {/* Sfondo e intestazione con temperatura e SearchBar */}
       <div className="container-fluid" style={{ position: "relative" }}>
         <img
           src={pioggia} alt="background"
@@ -66,22 +71,20 @@ function Home() {
               minHeight: "700px",
             }}
           >
-
             <hr className="rigaBianca" />
             <h1 className="text-white  border-start border-3 p-2">
-            {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
+              {loading ? "Caricamento..." : weatherData?.cityName || "N/A"}
             </h1>
             <h2 className="text-white display-1 fw-bold">
               {loading ? "Caricamento..." : `${Math.round(weatherData?.temperature || 0)}°C`}
             </h2>
 
             <SearchBar onSearch={handleSearch} />
-
           </div>
         </div>
       </div>
 
-    {/* ROW PER INFO DELLA CITTA PRINCIPALE (VENTO PIOGGIA UMIDITA) */}
+      {/* Informazioni principali della città (vento, descrizione, umidità) */}
       <div className="row bg-black m-0">
         <div className="col-md-4 col-xs-6 p-0" >
           <CardInfo 
@@ -103,10 +106,7 @@ function Home() {
         </div>
       </div>
 
- 
-
-
-      {/* row per le CardCity  */}
+      {/* Card per altre città */}
       <div className="row bg-black pt-5 pb-5 px-3">
         {otherCities.length > 0 ? (
           otherCities.map((city, index) => (

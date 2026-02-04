@@ -4,8 +4,11 @@ import NavigationButton from "../components/componentsReusable/Button";
 import Gatto from "../fulmine/fulmine";
 
 function NotFound() {
-   return (
+  // Pagina 404 personalizzata con animazione fulmine e bottone per tornare alla Home
+  return (
     <div className="notfound-container">
+
+      {/* SVG fulmine decorativo */}
       <svg
         className="lightning"
         width="200"
@@ -18,9 +21,11 @@ function NotFound() {
         />
       </svg>
 
+      {/* Messaggio 404 */}
       <h1> <strong>404</strong> </h1>
       <p>La tempesta ha cancellato questa pagina</p>
 
+      {/* Bottone per tornare alla Home */}
       <Link to="/" className="back-btn">
         <NavigationButton
           colorBackground="#ffffff"
@@ -30,6 +35,8 @@ function NotFound() {
           fontSize="fs-5"
         />
       </Link>
+
+      {/* Componente extra decorativo */}
       <Gatto/>
     </div>
   );

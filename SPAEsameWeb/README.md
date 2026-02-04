@@ -29,9 +29,9 @@ Nota per React: molti componenti di Bootstrap richiedono manipolazione diretta d
 >>>>>>> 9bf5abdc1b7fe0b5101617ac3e791d3e0961341c
 
 Concetti utili di Bootstrap usati nel progetto:
-- Grid system: `container`, `row`, `col-12 col-sm-6 col-md-4` (breakpoint xs/sm/md/lg/xl/xxl).
-- Utility classes: `d-flex`, `justify-content-center`, `align-items-center`, `p-2`, `m-3`, `text-white`.
-- Componenti: `card`, `btn`, `navbar`.
+- Grid system: `container`, `row`, `col-12 col-sm-6 col-md-4` (breakpoint xs/sm/md/lg/xl/xxl)...
+- Utility classes: `d-flex`, `justify-content-center`, `align-items-center`, `p-2`, `m-3`, `text-white`...
+- Componenti: `card`, `btn`, `navbar`...
 - Personalizzazione: è possibile sovrascrivere variabili Sass di Bootstrap per tema e colori se si compila da sorgente.
 
 Esempio rapido di layout responsivo:
@@ -45,15 +45,15 @@ Esempio rapido di layout responsivo:
 </div>
 ```
 
-# Consegna progetto — SPA Meteo (React + TypeScript + Vite)
+# SPA Meteo (React + TypeScript + Vite)
 
-## Informazioni progetto
-- **Titolo:** SPA Meteo — Esame/Progetto
-- **Linguaggi / Tool:** React, TypeScript, Vite, Bootstrap 5
+## Info
+- **Titolo:** SPA Meteo — Simone Righi
+- **Linguaggi & Tool:** React, TypeScript, Vite, Bootstrap 5
 - **Scopo:** fornire una Single Page Application che permetta di cercare una città e visualizzarne il meteo attuale, salvare città preferite e consultare dettagli meteorologici.
 
-## Studente / Autore
-- Inserire qui il nome dello studente, matricola e corso (es. "Nome Cognome — Matricola — Corso di ...").
+## Studente
+- Simone Righi
 
 ## Requisiti per esecuzione
 - Node.js >= 16
@@ -61,7 +61,7 @@ Esempio rapido di layout responsivo:
 
 ## Installazioni per il funzionamento del progetto:
 1. Clonare il repository
-2. Installare dipendenze:
+2. Installare le dipendenze:
 
 ```bash
 npm install
@@ -73,26 +73,22 @@ npm install
 npm run dev
 ```
 
-## Lascio il link della SPA deployato grazie a Netlify
-
-```
-
-```
-
-## Come testare (checklist rapida per il docente)
-- Avviare `npm run dev` e aprire `http://localhost:5173` (o la porta indicata da Vite).
-- Nella Home verificare che venga caricata la città principale (es. Roma) e che appaiano le card informative.
-- Usare la barra di ricerca per cercare una città a scelta; verificare che la pagina di dettaglio mostri i dati corretti (temperatura, minima/massima, umidità, vento, pressione, coordinate).
+## Testing rapido
+- Avviare con `npm run dev` o aprire il link del deploy `https://69825567bc3067301f4ef4a5--gleeful-liger-060a5b.netlify.app/`
+- Nella Home deve caricarsi la città che ho meso come default (Roma) e che appaiano le card con i dettagli della città.
+- Usare la barra di ricerca per cercare una città, verificare che la pagina di dettaglio mostri i dati corretti (temperatura, minima, massima, umidità, vento, pressione, coordinate).
 - Aggiungere/rimuovere dai preferiti e verificare che i dati siano persistiti via `localStorage` (chiudere/riaprire pagina).
 - Ridimensionare la finestra per verificare il comportamento responsive (mobile/tablet/desktop).
+- Se non vengono caricati i dati di una determinata città e viene visualizzata la scritta Caricamento... , molto probabilmente la mia API_KEY è scaduta e quindi utilizzare l'altra nel file `weatherApi.ts`.
 
 ## Struttura del progetto (principali file e cartelle)
-- `index.html` — entry HTML
-- `src/main.tsx` — bootstrap dell'app
-- `src/App.tsx` — definizione delle rotte e layout
-- `src/pages/Home.tsx` — pagina principale (ricerca, header, elenco città)
-- `src/pages/CityDetails.tsx` — pagina di dettaglio per singola città
+- `index.html` — HTML principale
+- `src/main.tsx` 
+- `src/App.tsx` — definite le rotte 
+- `src/pages/Home.tsx` — pagina principale
+- `src/pages/CityDetails.tsx` — pagina di dettaglio per città
 - `src/pages/Favorites.tsx` — pagina preferiti
+- - `src/pages/NotFound.tsx` — pagina 404
 - `src/components/componentsReusable/` — componenti riutilizzabili
   - `CardInfo.tsx` — card dettagliata meteo per una città
   - `CardCity.tsx` — card riassuntiva per la lista delle città
@@ -113,48 +109,8 @@ npm run dev
   - `getWeatherForMultipleCities(cityNames: string[]): Promise<WeatherData[]>`
   - `getCurrentWeatherByCoordinates(lat: number, lon: number): Promise<WeatherData | null>`
 - `WeatherData` è l'interfaccia TypeScript che definisce i campi utilizzati dall'app (nome città, temperature, umidità, vento, icona, lat/lon).
-- Per consegna formale: si consiglia di estrarre la API key in una variabile d'ambiente. Esempio `.env` (NON committare il file `.env`):
 
-```env
-VITE_OPENWEATHER_API_KEY=la_tua_chiave
-```
-
-e in `weatherApi.ts` leggere con `import.meta.env.VITE_OPENWEATHER_API_KEY`.
-
-## Funzionalità implementate (lista per la valutazione)
-- Ricerca città e visualizzazione dettagli meteo
-- Lista di città pre-caricate nella Home
-- Visualizzazione dettagli (temperatura, percepita, min/max, umidità, vento, pressione, coordinate)
-- Aggiungi/rimuovi preferiti con persistenza in `localStorage`
-- Layout responsive basato su Bootstrap
-
-## Test manuali consigliati (casi minimi da verificare)
-1. Ricerca di una città valida (es. "Milano") → pagina dettagli: dati sensati.
-2. Ricerca di città non valida → mostra messaggio di errore o fallback.
-3. Aggiunta ai preferiti → verifica `localStorage` e visualizzazione nella pagina `Favorites`.
-4. Visualizzazione su schermo piccolo (mobile): controllare leggibilità e sovrapposizioni.
-
-## Limitazioni note
-- API key è hardcoded (motivo: semplicità per l'esercizio). Da rimuovere prima di deploy pubblico.
-- Mancano test automatizzati unit/e2e.
-- Gestione errori minima — può essere migliorata con notifiche e retry.
-
-## Miglioramenti possibili (per punti extra)
-- Spostare la API key nel `.env` e usarla con `import.meta.env`.
-- Aggiungere test unitari (Jest / React Testing Library) e test di integrazione.
-- Localizzazione completa (i18n) e gestione multi-lingua.
-- Migliorare accessibilità e coprire casi di edge (offline, latenza alta).
-
-## Istruzioni di consegna (consigliate per il docente)
-1. Includere il repository Git con tutti i file sorgente.
-2. Se richiesto, allegare un file ZIP con la cartella del progetto.
-3. Fornire il branch o il tag usato per la consegna.
-4. Fornire eventuali credenziali o API key di prova (se necessario) in un file separato e non committato.
-
-Suggerimento commit esempio:
-
-```bash
-git add .
-git commit -m "feat: consegna progetto SPA Meteo - Nome Cognome"
-git push origin main
-```
+## Fonti
+- Documentazione di Bootstrap ``` https://getbootstrap.com/docs/5.3/getting-started/introduction/ ```
+- API: OpenWeatherAPI ``` https://openweathermap.org/api ```
+- ChatGpt: Per la creazione di svg manuali (fulmini pagina 404) e dubbi vari
